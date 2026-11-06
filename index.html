@@ -1,0 +1,151 @@
+
+<style>
+.reward-box {
+  max-width: 420px;
+  margin: 30px auto;
+  padding: 28px 22px;
+  text-align: center;
+  color: #ffe7b0;
+  background:
+    radial-gradient(circle at top, #762020 0%, transparent 55%),
+    linear-gradient(145deg, #310606, #160303 75%);
+  border: 2px solid #d9a441;
+  border-radius: 20px;
+  box-shadow:
+    0 0 15px #d9a44166,
+    0 0 40px #a51b1b44,
+    inset 0 0 20px #d9a44122;
+  font-family: Arial, sans-serif;
+}
+
+.reward-box h2 {
+  color: #ffdc75;
+  font-size: 25px;
+  text-shadow: 0 0 12px #ffc247;
+  letter-spacing: 1px;
+}
+
+.reward-box p {
+  color: #f5d6b0;
+}
+
+.reward-balance {
+  font-size: 32px;
+  font-weight: 900;
+  margin: 25px 0;
+  color: #ffdc75;
+  text-shadow: 0 0 15px #ffae00;
+}
+
+.reward-btn {
+  width: 100%;
+  padding: 16px;
+  border: 1px solid #ffe6a0;
+  border-radius: 12px;
+  background: linear-gradient(
+    135deg,
+    #8c1010,
+    #d52a18 45%,
+    #b87819
+  );
+  color: #fff1c5;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0 0 18px #e4a42c66;
+  transition: .3s;
+}
+
+.reward-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 28px #ffbd43;
+}
+
+.reward-btn:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+#reward-message {
+  margin-top: 20px;
+  color: #ffdc75;
+  font-weight: bold;
+  min-height: 20px;
+}
+
+.reward-box small {
+  display: block;
+  margin-top: 15px;
+  color: #d9b98b;
+}
+</style>
+
+<div class="reward-box">
+  <h2>👑 HADIAH SALDO GRATIS 👑</h2>
+
+  <p>Klaim hadiah spesial hari ini!</p>
+
+  <div class="reward-balance" id="reward-balance">
+    Rp 0
+  </div>
+
+  <button class="reward-btn" id="claim-reward">
+    🎁 KLAIM HADIAH SEKARANG
+  </button>
+
+  <div id="reward-message">
+    ✨ Semoga beruntung! ✨
+  </div>
+
+  <small>saldo bisa diclaim di KAWASANTOTO</small>
+</div>
+
+<script>
+(() => {
+  const hadiah = [50000, 100000, 250000, 500000, 1000000];
+  let saldo = Number(localStorage.getItem("demoSaldo") || 0);
+  const tanggal = new Date().toLocaleDateString("en-CA");
+
+  const balance = document.getElementById("reward-balance");
+  const button = document.getElementById("claim-reward");
+  const message = document.getElementById("reward-message");
+
+  function updateSaldo() {
+    balance.textContent = "Rp " + saldo.toLocaleString("id-ID");
+  }
+
+  updateSaldo();
+
+  if (localStorage.getItem("claimDate") === tanggal) {
+    button.disabled = true;
+    button.textContent = "SUDAH DIKLAIM HARI INI";
+  }
+
+  button.addEventListener("click", () => {
+    if (localStorage.getItem("claimDate") === tanggal) {
+      message.textContent = "Hadiah hari ini sudah diklaim!";
+      return;
+    }
+
+    const nominal = hadiah[
+      Math.floor(Math.random() * hadiah.length)
+    ];
+
+    saldo += nominal;
+
+    localStorage.setItem("FREESaldo", saldo);
+    localStorage.setItem("claimDate", tanggal);
+
+    updateSaldo();
+
+    message.textContent =
+      "🎉 Selamat! Hadiah  dapat di claim langsung ke KAWASANTOTO 🎉" +
+      nominal.toLocaleString("id-ID");
+
+    button.disabled = true;
+    button.textContent = "SUDAH DIKLAIM HARI INI";
+  });
+})();
+</script>
