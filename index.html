@@ -1,151 +1,513 @@
 
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bonus Saldo Special Event - Kawasantoto</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-.reward-box {
-  max-width: 420px;
-  margin: 30px auto;
-  padding: 28px 22px;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  color: white;
   text-align: center;
-  color: #ffe7b0;
+  overflow-x: hidden;
   background:
-    radial-gradient(circle at top, #762020 0%, transparent 55%),
-    linear-gradient(145deg, #310606, #160303 75%);
-  border: 2px solid #d9a441;
-  border-radius: 20px;
-  box-shadow:
-    0 0 15px #d9a44166,
-    0 0 40px #a51b1b44,
-    inset 0 0 20px #d9a44122;
-  font-family: Arial, sans-serif;
+    radial-gradient(circle at 10% 10%, #ff73d544, transparent 30%),
+    radial-gradient(circle at 90% 80%, #42d8ff33, transparent 30%),
+    linear-gradient(145deg, #160b3e, #35105e, #100c36);
 }
 
-.reward-box h2 {
-  color: #ffdc75;
-  font-size: 25px;
-  text-shadow: 0 0 12px #ffc247;
-  letter-spacing: 1px;
+.sparkle {
+  position: fixed;
+  color: #ffe9a5;
+  pointer-events: none;
+  animation: float 4s infinite ease-in-out;
+  z-index: 0;
 }
 
-.reward-box p {
-  color: #f5d6b0;
+.s1 {top: 12%;left: 7%}
+.s2 {top: 23%;right: 8%}
+.s3 {top: 65%;left: 5%}
+.s4 {top: 78%;right: 7%}
+
+@keyframes float {
+  50% {transform: translateY(-20px) rotate(25deg)}
 }
 
-.reward-balance {
-  font-size: 32px;
-  font-weight: 900;
-  margin: 25px 0;
-  color: #ffdc75;
-  text-shadow: 0 0 15px #ffae00;
+header {
+  position: relative;
+  padding: 30px 12px 10px;
+  z-index: 1;
 }
 
-.reward-btn {
+.tag {
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 30px;
+  background: linear-gradient(135deg,#ffe99b,#ffb5dc);
+  color: #65265f;
+  font-size: 12px;
+  font-weight: 800;
+  box-shadow: 0 0 25px #ffb5dc66;
+}
+
+h1 {
+  font-family: 'Fredoka', sans-serif;
+  font-size: clamp(29px,6vw,47px);
+  margin: 16px 0 4px;
+  color: #ffe9a5;
+  text-shadow: 0 4px 0 #a7479b,0 0 25px #ff77d7;
+}
+
+.brand {
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 5px;
+  color: #ffb5e7;
+}
+
+.subtitle {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #e8d9ff;
+}
+
+.mascot {
+  font-size: 55px;
+  margin: 15px 0 5px;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  50% {transform: translateY(-9px)}
+}
+
+.panel {
+  position: relative;
+  z-index: 1;
+  width: min(94%,480px);
+  margin: 12px auto 35px;
+  padding: 23px 15px 27px;
+  border: 2px solid #ffffff30;
+  border-radius: 28px;
+  background: linear-gradient(145deg,#ffffff1c,#ffffff08);
+  box-shadow: 0 15px 50px #0005,inset 0 0 25px #ffffff0c;
+  backdrop-filter: blur(12px);
+}
+
+.panel h2 {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 22px;
+  color: #ffe7a3;
+}
+
+.description {
+  margin-top: 8px;
+  font-size: 11px;
+  color: #e8d9ff;
+}
+
+.wheel-wrap {
+  width: min(82vw,340px);
+  aspect-ratio: 1;
+  margin: 27px auto 25px;
+  position: relative;
+}
+
+canvas {
+  display: block;
   width: 100%;
-  padding: 16px;
-  border: 1px solid #ffe6a0;
-  border-radius: 12px;
-  background: linear-gradient(
-    135deg,
-    #8c1010,
-    #d52a18 45%,
-    #b87819
-  );
-  color: #fff1c5;
-  font-size: 16px;
-  font-weight: 900;
-  letter-spacing: 1px;
+  height: 100%;
+  border-radius: 50%;
+  border: 9px solid #ffe08a;
+  box-shadow: 0 0 0 5px #a74cda,0 0 35px #ff9ce7;
+}
+
+.pointer {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  width: 0;
+  height: 0;
+  border-left: 18px solid transparent;
+  border-right: 18px solid transparent;
+  border-top: 36px solid white;
+  filter: drop-shadow(0 3px 3px #0008);
+}
+
+.hub {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: linear-gradient(135deg,#fff1a8,#ff9dce);
+  border: 5px solid white;
+  color: #7b277e;
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+  box-shadow: 0 0 18px white;
+}
+
+.spin {
+  padding: 15px 30px;
+  border: 0;
+  border-radius: 50px;
+  font-family: 'Poppins',sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  color: #5c2671;
   cursor: pointer;
-  box-shadow: 0 0 18px #e4a42c66;
-  transition: .3s;
+  background: linear-gradient(135deg,#fff0a6,#ffbd65,#ff83c7);
+  box-shadow: 0 6px 0 #a94b91,0 0 25px #ff83d777;
+  transition: .2s;
 }
 
-.reward-btn:hover {
-  transform: scale(1.04);
-  box-shadow: 0 0 28px #ffbd43;
+.spin:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.1);
 }
 
-.reward-btn:disabled {
-  opacity: .5;
+.spin:disabled {
+  opacity: .65;
   cursor: not-allowed;
   transform: none;
 }
 
-#reward-message {
-  margin-top: 20px;
-  color: #ffdc75;
-  font-weight: bold;
-  min-height: 20px;
+.result {
+  display: none;
+  margin: 22px auto 5px;
+  padding: 20px 12px;
+  border-radius: 20px;
+  background: #ffffff18;
+  border: 1px solid #ffe49a;
+  animation: pop .4s ease;
 }
 
-.reward-box small {
+@keyframes pop {
+  from {transform: scale(.8);opacity: 0}
+  to {transform: scale(1);opacity: 1}
+}
+
+.result strong {
   display: block;
-  margin-top: 15px;
-  color: #d9b98b;
+  font-family: 'Fredoka',sans-serif;
+  font-size: 30px;
+  color: #ffe48b;
+  margin: 8px;
+}
+
+.options {
+  margin-top: 30px;
+}
+
+.prizes {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 9px;
+  margin-top: 17px;
+}
+
+.prize {
+  padding: 12px 5px;
+  border-radius: 13px;
+  background: linear-gradient(135deg,#ffffff22,#ffffff0b);
+  border: 1px solid #ffffff30;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.prize span {
+  display: block;
+  font-size: 19px;
+  margin-bottom: 3px;
+}
+
+.prize:last-child {
+  grid-column: 1/-1;
+}
+
+.note {
+  margin-top: 23px;
+  font-size: 10px;
+  color: #d6c7ec;
+  line-height: 1.8;
+}
+
+footer {
+  position: relative;
+  z-index: 1;
+  padding: 0 10px 25px;
+  font-size: 11px;
+  color: #cbbbe4;
 }
 </style>
+</head>
 
-<div class="reward-box">
-  <h2>👑 HADIAH SALDO GRATIS 👑</h2>
+<body>
 
-  <p>Klaim hadiah spesial hari ini!</p>
+<div class="sparkle s1">✦</div>
+<div class="sparkle s2">✧</div>
+<div class="sparkle s3">★</div>
+<div class="sparkle s4">✦</div>
 
-  <div class="reward-balance" id="reward-balance">
-    Rp 0
+<header>
+  <div class="tag">🎉 SPECIAL EVENT 🎉</div>
+
+  <h1>BONUS SALDO</h1>
+
+  <div class="brand">KAWASANTOTO</div>
+
+  <p class="subtitle">
+    Putar keberuntunganmu dan temukan kejutan spesial!
+  </p>
+
+  <div class="mascot">🐻🎀</div>
+</header>
+
+<main class="panel">
+
+  <h2>🎡 WHEEL OF HAPPINESS 🎡</h2>
+
+  <p class="description">
+    Satu kesempatan untuk mencoba Lucky Spin!
+  </p>
+
+  <div class="wheel-wrap">
+    <div class="pointer"></div>
+
+    <canvas id="wheel" width="700" height="700"></canvas>
+
+    <div class="hub">⭐</div>
   </div>
 
-  <button class="reward-btn" id="claim-reward">
-    🎁 KLAIM HADIAH SEKARANG
+  <button class="spin" id="spin">
+    ✨ PUTAR SEKARANG ✨
   </button>
 
-  <div id="reward-message">
-    ✨ Semoga beruntung! ✨
+  <div class="result" id="result">
+    <div style="font-size:38px">🎊🎁🎊</div>
+    <div>HASIL SPIN KAMU</div>
+    <strong id="amount"></strong>
+    <div style="font-size:12px">
+      Terima kasih sudah berpartisipasi! 💗
+    </div>
   </div>
 
-  <small>saldo bisa diclaim di KAWASANTOTO</small>
-</div>
+  <div class="options">
+    <h2>💎 PILIHAN BONUS 💎</h2>
+
+    <div class="prizes">
+      <div class="prize"><span>💜</span>50RB</div>
+      <div class="prize"><span>💗</span>100RB</div>
+      <div class="prize"><span>💙</span>150RB</div>
+      <div class="prize"><span>💛</span>200RB</div>
+      <div class="prize"><span>💚</span>250RB</div>
+      <div class="prize"><span>🧡</span>300RB</div>
+      <div class="prize"><span>❤️</span>350RB</div>
+      <div class="prize"><span>💖</span>400RB</div>
+      <div class="prize"><span>💎</span>450RB</div>
+      <div class="prize"><span>💰</span>DANA 50RB</div>
+    </div>
+  </div>
+
+  <p class="note">
+    SPECIAL EVENT KAWASANTOTO<br>
+    Simulasi Lucky Spin. Hasil putaran merupakan hasil demo
+    dan tidak otomatis memberikan atau mencairkan saldo.
+    Syarat dan ketentuan berlaku.
+  </p>
+
+</main>
+
+<footer>
+  ✨ KAWASANTOTO • SPECIAL EVENT ✨
+</footer>
 
 <script>
-(() => {
-  const hadiah = [50000, 100000, 250000, 500000, 1000000];
-  let saldo = Number(localStorage.getItem("demoSaldo") || 0);
-  const tanggal = new Date().toLocaleDateString("en-CA");
 
-  const balance = document.getElementById("reward-balance");
-  const button = document.getElementById("claim-reward");
-  const message = document.getElementById("reward-message");
+const prizes = [
+ "50RB","100RB","150RB","200RB","250RB",
+ "300RB","350RB","400RB","450RB","DANA 50RB"
+];
 
-  function updateSaldo() {
-    balance.textContent = "Rp " + saldo.toLocaleString("id-ID");
+const colors = [
+ "#ff79c9","#8d76ff","#48c9ee","#ffd36b",
+ "#72dfb0","#ff9b65","#fa668b","#a77bff",
+ "#50d5d0","#f6a5e5"
+];
+
+const canvas = document.getElementById("wheel");
+const ctx = canvas.getContext("2d");
+
+const center = 350;
+const radius = 330;
+const arc = Math.PI * 2 / prizes.length;
+
+const button = document.getElementById("spin");
+const result = document.getElementById("result");
+const amount = document.getElementById("amount");
+
+let rotation = 0;
+let spinning = false;
+
+const STORAGE_KEY = "kawasantoto_spin_used";
+
+function drawWheel() {
+
+ ctx.clearRect(0,0,700,700);
+
+ prizes.forEach((prize,i)=>{
+
+  const start = -Math.PI/2 + i*arc + rotation;
+  const end = start + arc;
+
+  ctx.beginPath();
+  ctx.moveTo(center,center);
+  ctx.arc(center,center,radius,start,end);
+  ctx.closePath();
+
+  ctx.fillStyle = colors[i];
+  ctx.fill();
+
+  ctx.strokeStyle = "#fff";
+  ctx.lineWidth = 5;
+  ctx.stroke();
+
+  ctx.save();
+
+  ctx.translate(center,center);
+  ctx.rotate(start+arc/2);
+
+  ctx.textAlign = "right";
+  ctx.textBaseline = "middle";
+  ctx.fillStyle = "#49204f";
+  ctx.font = "bold 27px Poppins, sans-serif";
+
+  ctx.fillText(prize,radius-28,0);
+
+  ctx.restore();
+
+ });
+
+}
+
+function showPreviousResult() {
+
+ const saved = localStorage.getItem(STORAGE_KEY);
+
+ if(saved !== null) {
+
+  try {
+   const data = JSON.parse(saved);
+
+   amount.textContent = data.prize;
+   result.style.display = "block";
+
+   button.disabled = true;
+   button.textContent = "🔒 SPIN SUDAH DIGUNAKAN";
+
+  } catch(e) {
+   localStorage.removeItem(STORAGE_KEY);
   }
 
-  updateSaldo();
+ }
 
-  if (localStorage.getItem("claimDate") === tanggal) {
-    button.disabled = true;
-    button.textContent = "SUDAH DIKLAIM HARI INI";
+}
+
+drawWheel();
+showPreviousResult();
+
+button.addEventListener("click",()=>{
+
+ if(spinning || localStorage.getItem(STORAGE_KEY)) return;
+
+ spinning = true;
+ button.disabled = true;
+ button.textContent = "🎡 SEDANG BERPUTAR...";
+
+ result.style.display = "none";
+
+ const winner = Math.floor(Math.random()*prizes.length);
+
+ const startRotation = rotation;
+
+ const targetRotation =
+  ((-(winner+0.5)*arc)%(Math.PI*2)+(Math.PI*2))%(Math.PI*2);
+
+ const current = rotation%(Math.PI*2);
+
+ const delta =
+  (targetRotation-current+Math.PI*2)%(Math.PI*2);
+
+ const endRotation =
+  rotation + 10*Math.PI*2 + delta;
+
+ const startTime = performance.now();
+ const duration = 5000;
+
+ function animate(now) {
+
+  const t = Math.min((now-startTime)/duration,1);
+
+  const ease = 1-Math.pow(1-t,5);
+
+  rotation =
+   startRotation+(endRotation-startRotation)*ease;
+
+  drawWheel();
+
+  if(t<1) {
+
+   requestAnimationFrame(animate);
+
+  } else {
+
+   rotation = endRotation%(Math.PI*2);
+
+   drawWheel();
+
+   const data = {
+    prize: prizes[winner],
+    time: new Date().toISOString()
+   };
+
+   localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(data)
+   );
+
+   amount.textContent = data.prize;
+   result.style.display = "block";
+
+   button.textContent = "🔒 SPIN SUDAH DIGUNAKAN";
+
+   spinning = false;
+
   }
 
-  button.addEventListener("click", () => {
-    if (localStorage.getItem("claimDate") === tanggal) {
-      message.textContent = "Hadiah hari ini sudah diklaim!";
-      return;
-    }
+ }
 
-    const nominal = hadiah[
-      Math.floor(Math.random() * hadiah.length)
-    ];
+ requestAnimationFrame(animate);
 
-    saldo += nominal;
+});
 
-    localStorage.setItem("FREESaldo", saldo);
-    localStorage.setItem("claimDate", tanggal);
-
-    updateSaldo();
-
-    message.textContent =
-      "🎉 Selamat! Hadiah  dapat di claim langsung ke KAWASANTOTO 🎉" +
-      nominal.toLocaleString("id-ID");
-
-    button.disabled = true;
-    button.textContent = "SUDAH DIKLAIM HARI INI";
-  });
-})();
 </script>
+
+</body>
+</html>
